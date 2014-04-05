@@ -47,11 +47,7 @@
 				
 				$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 				parse_str($query, $params);
-				if (isset($params['access_token'])) {
-					$token = $params['access_token'];
-				} else {
-					$token = null;
-				}
+				$token = $params['access_token'];
 				if($token == null || $token == "")
 				{
 				?>
@@ -67,7 +63,7 @@
 				<?php
 				} else {
 				?>
-				<form name="input" action="demo_form_action.asp" method="get">
+				<form name="input" action="demo_form_action.asp" method="post">
 					<table>
 						<td>
 							<tr><h3>Your Wish</h3></tr>
@@ -96,11 +92,7 @@
 				</form>
 				<?php
 				}
-<<<<<<< HEAD
 				?>
-=======
-				?>								
->>>>>>> ef8a54cb1de86fbaf21c11eebbc9bba1c376e2e3
 
 			</div>
 
