@@ -63,4 +63,28 @@ img{
 	box-shadow:5px 5px 10px #000000;
 }
 
+button {
+display: inline;
+background: #3D95CE;
+background-image:url(img/venmo_logo_white.svg);
+/* background: rgba(061, 149, 206, 0.9); */
+font-size: 14px;
+text-transform: uppercase;
+padding: 8px 16px;
+color: #fff;
+border: none;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+font-size: 14px;
+line-height: 14px;
+opacity: .9;
+-webkit-appearance: button;
+cursor: pointer;
+vertical-align: baseline;
+font-family: sans-serif;
+text-align: center;
+text-shadow: none;
+}
+
 
