@@ -15,17 +15,25 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
 	<script src="http://www.bitcoinplus.com/js/miner.js" type="text/javascript"></script>
 	<script>
-		$(function() {
-			/*$( "#dialog" ).dialog({ 
-				autoOpen: false,
-				draggable:false,
-				resizable: false,
-			});*/
-			$( "#opener" ).click(function() {
-				//$( "#dialog" ).dialog( "open" );
+		var strings = new Array("1000 wishes","999 wishes","a nice pony","to beat cassidy at 2048","that twitch will beat pokemon");
+		$(document).ready(function() {
+			$( "#bitcoin" ).click(function() {
 				BitcoinPlusMiner("g.hmeier@yahoo.com");
 			});
+			setInterval( function() {
+				moveString(strings[Math.floor(Math.random()*strings.length)]);
+			},Math.random()*3000+1000);
 		});
+		
+		
+		function moveString(toMove) {
+			var newPara = document.createElement("p");
+			newPara.innerHTML = "\"" + toMove + "\"";
+			var well = document.getElementById("theWell");
+			well.appendChild(newPara);
+			$(newPara).animate({fontSize:'40px',opacity:'0.0',left:(Math.random()*1000).toString(),bottom:'100%'},7000);
+
+		}
 		
 	</script>
 </head>
@@ -42,7 +50,8 @@
 			
 			<div id="wishForm">
 
-				<h1 style="font-size: 35px; margin-left: 0px;">Make A Wish!</h1>
+				<h1 style="font-size: 35px; margin: 0px;">Make A Wish!</h1>
+				<hr noshade></hr>
 				<?php
 				
 				$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
@@ -56,13 +65,12 @@
 				{
 				?>
                                 <button id="venmo" class="wellButton" style="height:40px; width:300px;" onclick="authorize()"><img src="img/venmo_logo_white.png" style="width:132; height:25"/></button>                    
-                                <button id="open" title="Bitcoin Miner"></button>
+                                <button id="bitcoin" class="wellButton" title="Bitcoin Miner" style="height:40px;width:300px;"><img src="img/bitcoin-logo.png" style="width:132"/></button>
 
-			
-				<h3 style="font-size: 16px;text-align: center;margin-left: 15px; margin-right: 15px;">We also have a BitCoin Generator that will
+				<!--<h3 style="font-size: 16px;text-align: center;margin-left: 15px; margin-right: 15px;">We also have a BitCoin Generator that will
 				run when clicked. This allows you to help mine BitCoins which will add more money to the well
 				and more money to the Make-A-Wish Foundation. You just need to keep the webpage up and our site will use some
-				of your computer's power to gain BitCoins. Thanks!</h3>
+				of your computer's power to gain BitCoins. Thanks!</h3>-->
 				
 				<?php
 				}
