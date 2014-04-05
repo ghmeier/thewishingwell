@@ -24,15 +24,6 @@
 				$( "#dialog" ).dialog( "open" );
 			});
 		});
-                function httpGet(theUrl)
-                {
-                    var xmlHttp = null;
-                
-                    xmlHttp = new XMLHttpRequest();
-                    xmlHttp.open( "GET", theUrl, false );
-                    xmlHttp.send( null );
-                    return xmlHttp.responseText;
-                }
 		
 	</script>
 </head>
@@ -65,13 +56,17 @@
 			
 			<div id="wishForm">
 				<h1 style="font-size: 35px; margin-left: 0px;">Make A Wish!</h1>
-                                <script>
-                                if (httpGet(document.URL)) {
-                                    //code
-                                }
-                                </script>
+				<?php
+				$query = parse_url($_SERVER['PATH_INFO'], PHP_URL_QUERY);
+				parse_str($query, $params);
+				$token = $params['access_token'];
+				if($token != null || $token != "")
+				{
+				?>
                                 <button style="height:40px; width:300px; font-size:30px; font-family: fantasy;" onclick="authorize()">Venmo</button>
-                                
+                                <?php
+				echo "Logined in";
+				?>
                                 
                                 
                                 <button id="opener" style="height:40px; width:300px; font-size:30px; font-family: fantasy;" >BitCoin</button>
