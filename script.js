@@ -23,11 +23,11 @@ var makePayment = function(access_token, user, note, amount)
 		"https://api.venmo.com/v1/payments?access_token=" + access_token +
 			"&user_id=" + user + "&amount=" + amount + 
 			"&note=" + note + "&recipients=" + ourAccount);
+	return response;
 };
 
 var authorize = function()
 {
-	//Redirect to the authorization page
 	window.location.replace("https://api.venmo.com/v1/oauth/authoraize?" +
-		"client_id=" + /* WHAT */ + "&scope=make_payments&response_type=token");
+		"client_id=1670&scope=make_payments&response_type=token");
 };
