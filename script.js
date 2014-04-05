@@ -1,3 +1,12 @@
+var getRequest = function(url)
+{
+	var req = new XMLHttpRequest();
+	req.overrideMimeType("application/json");
+	req.open('GET', url, false);
+	req.send(null);
+	return JSON.parse(req.responseText);
+};
+
 var postRequest = function(url)
 {
 	var req = new XMLHttpRequest();
