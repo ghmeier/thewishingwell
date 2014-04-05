@@ -63,7 +63,11 @@ img{
 	box-shadow:5px 5px 10px #000000;
 }
 
-button {
+.wellButton {
+	margin:5px;
+}
+
+#venmo{
 display: inline;
 background: #3D95CE;
 background-image:url(img/venmo_logo_white.svg);
