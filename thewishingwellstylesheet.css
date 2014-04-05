@@ -1,0 +1,39 @@
+body {
+	background:url(img/backgroundImage.jpeg) no-repeat left top fixed;
+	background-size: 100%  100%;
+	overflow-y:scroll;
+}
+
+
+img{
+	margin:0px;
+	padding:0xp;
+}
+
+#theWell {
+	position:absolute;
+	left:15%;
+	bottom:10%;
+	cursor:pointer;
+}
+
+#wishForm {
+	position:absolute;
+	right:10%;
+	width:500px;
+	height:300px;
+	text-align:center;
+	background-color:#669999;
+}
+
+#userFeed{
+	position:absolute;
+	right:10%;
+	width:500px;
+	height:600px;
+	text-align:center;
+	bottom:2%;
+	background-color:#CCCCB2;
+	overflow-y:scroll;
+}
+
