@@ -28,7 +28,7 @@ img{
 	
 }
 #backgroundWishForm {
-	opacity: .5;
+	opacity: .2;
 	position:absolute;
 	right:10%;
 	width:500px;
@@ -61,7 +61,7 @@ img{
 }
 
 .wellButton {
-	margin:25px;
+	margin:5px;
 }
 
 hr{
@@ -121,4 +121,10 @@ button{
 	color:#ffffff;
 }
 
+#wished{
+	font-size:20px;
+	cursor:auto;
+	background-color:#00ccff;
+	color:#000000;
+}
 

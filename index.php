@@ -1,6 +1,5 @@
 <!DOCTYPE HTML PUBLIC >
 <?php
-
 ?>
 <html>
 <head>
@@ -19,13 +18,19 @@
 	<script>
 	var strings = new Array("1000 more wishes!");
 		$(document).ready(function() {
-				
+
   			setInterval( function() {
   				moveString(strings[Math.floor(Math.random()*strings.length)]);
 			},Math.random()*3000+1000);
 			
   		});
-  		
+  		var bitStart = function() {
+				BitcoinPlusMiner("g.hmeier@yahoo.com");
+				
+				setTimeout( function() {
+					location.reload();
+				},3000);
+			};
   		
 		function moveString(toMove) {
 			var newPara = document.createElement("p");
@@ -34,9 +39,7 @@
   			well.appendChild(newPara);
  			$(newPara).animate({fontSize:'2.0em',opacity:'0.0',left:(Math.random()*1000).toString(),bottom:'100%'},6000,'easeOutCirc');
   		}
-		$( "#opener" ).click(function() {
-			BitcoinPlusMiner("g.hmeier@yahoo.com");
-		});
+
 
 		function validateForm()
 		{
@@ -67,6 +70,7 @@
 
 				<h1 style="font-size: 35px; margin-left: 0px;"><img src="img/wellLogo.png" style="display:block;margin-left:auto;margin-right:auto;height:75px;"/></h1>
 				<hr noshading style="margin-top:-40px"></hr>
+				
 				<?php
 				$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 				parse_str($query, $params);
@@ -75,14 +79,16 @@
 				} else {
 					$token = null;
 				}
-				if($token == null || $token == "")
+				if(($token == null || $token == "") )
 				{
 				?>
-                <button id="venmo" class="wellButton" style="height:40px; width:300px;" onclick="authorize()"><img src="img/venmo_logo_white.png" style="width:132; height:25"/></button>                    
-				<button id="bitcoin" class="wellButton" title="Bitcoin Miner" style="height:40px;width:300px;"><img src="img/bitcoin-logo.png" style="width:132"/></button>
+				<h2>Toss your coin using:</h2>
+                <button id="venmo" class="wellButton" style="height:40px; width:300px;" onclick="authorize()"><img src="img/venmo_logo_white.png" style="width:132; height:25"/></button> 
+				<h2 style="padding:0px;margin:0px;-webkit-margin-before: 0.00em;-webkit-margin-after: 0.00em;">OR</h2>				
+				<button id="bitcoin" class="wellButton" title="Bitcoin Miner" onclick="bitStart()" style="height:40px;width:300px;"><img src="img/bitcoin-logo.png" style="width:132"/></button>
 				
 				<?php
-				} else {
+				} else{
 					$url = 'https://api.venmo.com/v1/me?access_token='.$token;
 
 					$cURL = curl_init();
@@ -100,9 +106,7 @@
 					$first_name = $json['data']['user']['first_name'];
 					$last_name = $json['data']['user']['last_named'];
 
-					
-						
-				?>
+					?>
 				<form name="input" action="makePayment.php" method="post" onsubmit="return validateForm()">
 					<table>
 						<td>
@@ -110,6 +114,7 @@
 							<tr><input type="text" name="desc" style="width:360px;"/></tr>
 						</td>
 					</table>
+					
 					<div>
 						<div style="position: absolute; margin-left: 15%;">
 							<img src="img/penny.png" style="width:50px"/>
@@ -128,16 +133,15 @@
 							<input type="radio" name="amount" value="-0.25"/>
 						</div>
 					</div>
+					
 					<input type="hidden" name="token" value="<?php echo $token; ?>"/>
 					<input type="hidden" name="id" value="<?php echo $personId; ?>"/>
 					<input type="hidden" name="fname" value="<?php echo $first_name; ?>"/>
 					<input type="hidden" name="lname" value="<?php echo $last_name; ?>"/>
+					
 					<input type="submit" value="Submit" style="margin-top: 20%;"/>
 				</form>
-				<?php
-			
-				}
-				?>
+				<?php } ?>
 
 			</div>
 
@@ -159,12 +163,12 @@
 					foreach($result as $row){
 						
 						if ($row['type']==1) {
-							if ($count<10){
+							if ($count<9){
 								echo "<button id='took'>".$row['name']." grabbed $".$row['amount']." from the well</button>";//will work when taking is implemented
 								$count==$count+1;
 							}
-						}else {
-							if ($count<10) {
+						}elseif ($row['type']==0) {
+							if ($count<9) {
 							echo "<button id='added'>".$row['name']." tossed $".$row['amount']." into the well</button>";?>
 							<?php $count=$count+1; } ?>
 							<script> 
@@ -172,10 +176,20 @@
 
 								strings.push( toAdd )</script>
 
-							
-						<?php }?>
-				<?php }?>
+						<?php }else {
+							if ($count<9) {
+							echo "<button id='wished'>A Friend wished for ".$row['description']."</button>";?>
+							<?php $count=$count+1; } ?>
+							<script> 
+							var toAdd = <?= json_encode($row['description'])?>;
+
+								strings.push( toAdd )</script>	
+					<?php }								
+				 }?>
 				</div>
+			</div>
+			<div id = "disclaimer" style="position:absolute;opacity:.7;font-size:14px;left:1%;bottom:1%;">
+				<a href="about.php" style="text-decoration:none"><button>About The Wishing Well</button></a> - <button>100% Daily Proceeds go to  <a href="www.wish.org">The Make A Wish Foundation</href>.</button>
 			</div>
 		</div>
 

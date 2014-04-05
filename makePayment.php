@@ -12,7 +12,6 @@
 		$lname = "User";
 	}
     
-    
     $con=mysqli_connect("localhost","root","Goringelitistmarmot1","isu_hackathon");
 
     // Check connection
@@ -22,7 +21,6 @@
       }
     $rows = mysqli_num_rows(mysqli_query($con,"SELECT * FROM activity"));
     $query = "INSERT INTO activity VALUES(0,'" . $fname . " " . $lname . "',0,".-$amount.",'".$description."');";
-	echo $query;
     $result = mysqli_query($con,$query);
 	if (!$result) {
 		echo "it failed\n";
@@ -39,9 +37,10 @@
     $result = curl_exec($cURL);
     
     curl_close($cURL);
-   // echo $url."<br/>";
+	//echo $url."<br/>";
     $json = json_decode($result, true);
     print_r($json);
-    
+	
+	echo '<a href="access_token=', urlencode($token), '">';
     
 ?>

@@ -1,4 +1,6 @@
 <?php
+
+	include 'globals.php';
     $token = ($_POST["token"]);
     $personId = ($_POST["id"]);
     $fname = ($_POST["fname"]);
