@@ -112,6 +112,7 @@ button{
 	font-size:20px;
 	cursor:auto;
 	background-color:#FFFFFF;
+	cursor:auto;
 }
 
 #took{
@@ -119,6 +120,7 @@ button{
 	cursor:auto;
 	background-color:#000000;
 	color:#ffffff;
+	cursor:auto;
 }
 
 #wished{
@@ -126,6 +128,7 @@ button{
 	cursor:auto;
 	background-color:#00ccff;
 	color:#000000;
+	cursor:auto;
 }
 
 #about-contain {

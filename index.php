@@ -75,7 +75,7 @@
 			
 			<div id="wishForm">
 
-				<h1 style="font-size: 35px; margin-left: 0px;"><img src="img/wellLogo.png" style="display:block;margin-left:auto;margin-right:auto;height:75px;"/></h1>
+				<h1 style="font-size: 35px; margin-left: 0px;"><img src="img/wellLogo.png" style="display:block;margin-left:auto;margin-right:auto;height:75px;padding-top:20px;"/></h1>
 				<hr noshading style="margin-top:-40px"></hr>
 				
 				<?php
@@ -85,7 +85,7 @@
 				} else {
 					$token = null;
 				}
-				if(($token == null || $token == "") )
+				if(($token == null || $token == "") && !isset($params['complete']))
 				{
 				?>
 				<h2>Toss your coin using:</h2>
@@ -111,7 +111,6 @@
 					$last_name = $json['data']['user']['last_name'];
 					
 					?>
-					<div>I am a new div<?= $json." " .$url. " ".$result." curl ".$cURL?> </div>
 				<form name="input" action="makePayment.php" method="post" onsubmit="return validateForm()">
 					<table>
 						<td>
