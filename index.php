@@ -88,7 +88,8 @@
 							<input type="radio" name="amount" value="25"/>
 						</div>
 					</div>
-				<input type="submit" value="Submit" style="margin-top: 20%;"/>
+					<input type="hidden" name="token" value="<?= $token ?>"/>
+					<input type="submit" value="Submit" style="margin-top: 20%;"/>
 				</form>
 				<?php
 				}
