@@ -128,3 +128,29 @@ button{
 	color:#000000;
 }
 
+#about-contain {
+	display:block;
+	margin-right:auto;
+	margin-left:auto;
+	width:1080;
+	height:950;
+	background:url(img/16.jpg);
+}
+
+#aboutSection {
+	padding:20px;
+	margin-left:10px;
+	margin-right:10px;
+}
+
+#aboutSection h2{
+	text-align:center;
+	font-size:20px;
+	font-weight:bold;
+}
+
+#about-contain hr{
+	margin-top:-10px;
+	margin-bottom:-10px;
+}
+

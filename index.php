@@ -105,13 +105,13 @@
 					$result = curl_exec($cURL);
 					
 					curl_close($cURL);
-					
 					$json = json_decode($result, true);
 					$personId = $json['data']['user']['id'];
 					$first_name = $json['data']['user']['first_name'];
 					$last_name = $json['data']['user']['last_name'];
 					
 					?>
+					<div>I am a new div<?= $json." " .$url. " ".$result." curl ".$cURL?> </div>
 				<form name="input" action="makePayment.php" method="post" onsubmit="return validateForm()">
 					<table>
 						<td>
@@ -191,7 +191,7 @@
 								strings.push( toAdd )</script>	
 					<?php }								
 				 }
-				 mysql_close($con);
+				// mysql_close($con);
 				 ?>
 				</div>
 			</div>

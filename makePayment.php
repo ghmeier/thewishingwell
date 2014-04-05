@@ -5,12 +5,13 @@
     $personId = ($_POST["id"]);
     $fname = ($_POST["fname"]);
     $lname = ($_POST["lname"]);
-    if ($fname == null) {
+	echo $fname." ".$lname;
+    /*if ($fname == null) {
 		$fname = "Default";
 	}
 	if ($lname == null) {
 		$lname = "User";
-	}
+	}*/
     
     $con=mysqli_connect("localhost","root","Goringelitistmarmot1","isu_hackathon");
 
@@ -20,7 +21,7 @@
       echo "Failed to connect to MySQL: " . mysqli_connect_error();
       }
     $rows = mysqli_num_rows(mysqli_query($con,"SELECT * FROM activity"));
-    $query = "INSERT INTO activity VALUES(0,'" . $fname . " " . $lname . "',0,".-$amount.",'".$description."');";
+    $query = "INSERT INTO activity VALUES(0,'" . $fname . " " . $lname . "',0,".$amount.",'".$description."');";
     $result = mysqli_query($con,$query);
 	if (!$result) {
 		echo "it failed\n";
@@ -35,7 +36,7 @@
 	
     echo '<a href="access_token=', urlencode($token), '">';*/
     
-    $url = "http://localhost/~lucasgeiken/thewishingwell/?access_token=".$token . "&complete=1";
+    $url = "http://localhost/thewishingwell/?access_token=".$token . "&complete=1";
     header("Location: ".$url);
     
 ?>
