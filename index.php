@@ -41,29 +41,25 @@
             </div>
 			
 			<div id="wishForm">
-<<<<<<< HEAD:index.php
 
 				<h1 style="font-size: 35px; margin-left: 0px;">Make A Wish!</h1>
 				<?php
-				$query = parse_url($_SERVER['PATH_INFO'], PHP_URL_QUERY);
+				
+				$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 				parse_str($query, $params);
 				$token = $params['access_token'];
-				if($token != null || $token != "")
+				if($token == null || $token == "")
 				{
 				?>
-                                <button style="height:40px; width:300px; font-size:30px; font-family: fantasy; "><img src="img/venmo_logo_white.png" style="width:132; height:25;"/></button>                    
-				<button id="opener" style="height:40px; width:300px; font-size:30px; font-family: fantasy;" >BitCoin</button>
-								<div id="dialog" onClick=""title="Bitcoin Miner">
-=======
-				<h1 style="font-size: 35px; margin-left: 0px;">Make A Wish!</h1> 
-                                <button id="venmo" class="wellButton" style="height:40px; width:300px;"><img src="img/venmo_logo_white.png" style="width:132;height:25"/></button>                    
-                                <button id="open" title="Bitcoin Miner">
->>>>>>> 32ddeda0fa4c426b4b07b37e27b337ef1ed3a162:index.php
-									<h3 style="font-size: 16px;text-align: center;margin-left: 15px; margin-right: 15px;">We also have a BitCoin Generator that will
-									run when clicked. This allows you to help mine BitCoins which will add more money to the well
-									and more money to the Make-A-Wish Foundation. You just need to keep the webpage up and our site will use some
-									of your computer's power to gain BitCoins. Thanks!</h3>
-								</div>
+                                <button id="venmo" class="wellButton" style="height:40px; width:300px;" onclick="authorize()"><img src="img/venmo_logo_white.png" style="width:132; height:25"/></button>                    
+                                <button id="open" title="Bitcoin Miner"></button>
+
+			
+				<h3 style="font-size: 16px;text-align: center;margin-left: 15px; margin-right: 15px;">We also have a BitCoin Generator that will
+				run when clicked. This allows you to help mine BitCoins which will add more money to the well
+				and more money to the Make-A-Wish Foundation. You just need to keep the webpage up and our site will use some
+				of your computer's power to gain BitCoins. Thanks!</h3>
+				
 				<?php
 				}
 				?>
