@@ -56,11 +56,7 @@
 				
 				$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 				parse_str($query, $params);
-				if (isset($params['access_token'])) {
-					$token = $params['access_token'];
-				} else {
-					$token = null;
-				}
+				$token = $params['access_token'];
 				if($token == null || $token == "")
 				{
 				?>
@@ -73,8 +69,38 @@
 				of your computer's power to gain BitCoins. Thanks!</h3>-->
 				
 				<?php
+				} else {
+				?>
+				<form name="input" action="demo_form_action.asp" method="post">
+					<table>
+						<td>
+							<tr><h3>Your Wish</h3></tr>
+							<tr><input type="text" name="user" style="width:360px;"/></tr>
+						</td>
+					</table>
+					<div>
+						<div style="position: absolute; margin-left: 15%;">
+							<h3>$0.01</h3>
+							<input type="radio" name="amount" value="1"/>
+						</div>
+						<div style="position: absolute; margin-left: 35%;">
+							<h3>$0.05</h3>
+							<input type="radio" name="amount" value="5"/>
+						</div>
+						<div style="position: absolute; margin-left: 55%;">
+							<h3>$0.10</h3>
+							<input type="radio" name="amount" value="10"/>
+						</div>
+						<div style="position: absolute; margin-left: 75%;">
+							<h3>$0.25</h3>
+							<input type="radio" name="amount" value="25"/>
+						</div>
+					</div>
+				<input type="submit" value="Submit" style="margin-top: 20%;"/>
+				</form>
+				<?php
 				}
-				?>								
+				?>
 
 			</div>
 
