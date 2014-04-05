@@ -1,8 +1,3 @@
-<html>
-<head></head>
-<body>
-<div id="fb-root"></div>
-<script>
   window.fbAsyncInit = function() {
   FB.init({
     appId      : '388085874667662',
@@ -59,12 +54,8 @@
       console.log('Good to see you, ' + response.name + '.');
     });
   }
-</script>
 
-<!--
-  Below we include the Login Button social plugin. This button uses the JavaScript SDK to
-  present a graphical Login button that triggers the FB.login() function when clicked. -->
-
-<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
-</body>
-</html>
+//  Below we include the Login Button social plugin. This button uses the JavaScript SDK to
+// present a graphical Login button that triggers the FB.login() function when clicked. -->/
+//
+//<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
