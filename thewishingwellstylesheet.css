@@ -24,6 +24,7 @@ img{
 	height:300px;
 	text-align:center;
 	background-color:#669999;
+	border-radius:2px;
 }
 
 #userFeed{
@@ -35,5 +36,7 @@ img{
 	bottom:2%;
 	background-color:#CCCCB2;
 	overflow-y:scroll;
+	border-radius:2px;
+	box-shadow:5px 5px 10px #000000;
 }
 
