@@ -56,8 +56,15 @@
 	</script>
 </head>
 
-	<body>		
-						
+	<body>
+		<?php
+		$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+		parse_str($query, $params);
+		
+		if(isset($params['complete'])) {
+			echo "<h3>Thank you for you wish!</h3>";	
+		} else echo "<h3> <br/></h3>";
+		?>				
 		<div id="container">
 			<div id="theWell" action="takecoin.php">
 				<img src="img/wishingwell.png"/>
@@ -72,8 +79,7 @@
 				<hr noshading style="margin-top:-40px"></hr>
 				
 				<?php
-				$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-				parse_str($query, $params);
+				
 				if(isset($params['access_token'])) {
 					$token = $params['access_token'];
 				} else {
@@ -101,11 +107,10 @@
 					curl_close($cURL);
 					
 					$json = json_decode($result, true);
-					echo $json;
 					$personId = $json['data']['user']['id'];
 					$first_name = $json['data']['user']['first_name'];
-					$last_name = $json['data']['user']['last_named'];
-
+					$last_name = $json['data']['user']['last_name'];
+					
 					?>
 				<form name="input" action="makePayment.php" method="post" onsubmit="return validateForm()">
 					<table>
@@ -118,19 +123,19 @@
 					<div>
 						<div style="position: absolute; margin-left: 15%;">
 							<img src="img/penny.png" style="width:50px"/>
-							<input type="radio" name="amount" value="-0.01"></input>
+							<input type="radio" name="amount" value="0.01"></input>
 						</div>
 						<div style="position: absolute; margin-left: 35%;">
 							<img src="img/nickel.png" style="width:60px"/>
-							<input type="radio" name="amount" value="-0.05"/>
+							<input type="radio" name="amount" value="0.05"/>
 						</div>
 						<div style="position: absolute; margin-left: 55%;">
 							<img src="img/dime.png" style="width:40px"/>
-							<input type="radio" name="amount" value="-0.10"/>
+							<input type="radio" name="amount" value="0.10"/>
 						</div>
 						<div style="position: absolute; margin-left: 75%;">
 							<img src="img/quarter.png" style="width:55px"/>
-							<input type="radio" name="amount" value="-0.25"/>
+							<input type="radio" name="amount" value="0.25"/>
 						</div>
 					</div>
 					
@@ -149,7 +154,7 @@
                         </div>
 			<div id="userFeed">
 				<div>
-				<h1>Activity at the Well</h1>
+				<h1 style="margin-top: 30px;">Activity at the Well</h1>
 				<!--
 				This section of php connects to the database, grabs all of the rows, and puts the information
 				in divs. If there are more than 10 data points in the database, it stops and only adds the
@@ -185,7 +190,9 @@
 
 								strings.push( toAdd )</script>	
 					<?php }								
-				 }?>
+				 }
+				 mysql_close($con);
+				 ?>
 				</div>
 			</div>
 			<div id = "disclaimer" style="position:absolute;opacity:.7;font-size:14px;left:1%;bottom:1%;">

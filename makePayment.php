@@ -28,19 +28,14 @@
     mysqli_close($con);
     
     
-    $url = "https://api.venmo.com/v1/payments?access_token=" . $token . "&amp;email=g.hmeier%40yahoo.com&amp;amount=".$amount."&amp;note=hahaha";
-    $cURL = curl_init();
+    exec("curl https://api.venmo.com/v1/payments -d access_token=" . $token . " -d email=g.hmeier%40yahoo.com -d action=pay -d amount=".$amount." -d note=I-made-a-wish-at-The-Wishing-Well");
     
-    curl_setopt($cURL, CURLOPT_URL, $url);
-    curl_setopt($cURL, CURLOPT_RETURNTRANSFER, TRUE);
-    
-    $result = curl_exec($cURL);
-    
-    curl_close($cURL);
-	//echo $url."<br/>";
-    $json = json_decode($result, true);
+    /**$json = json_decode($result, true);
     print_r($json);
 	
-	echo '<a href="access_token=', urlencode($token), '">';
+    echo '<a href="access_token=', urlencode($token), '">';*/
+    
+    $url = "http://localhost/~lucasgeiken/thewishingwell/?access_token=".$token . "&complete=1";
+    header("Location: ".$url);
     
 ?>
