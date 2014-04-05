@@ -18,6 +18,5 @@ var makePayment = function(access_token, user, note, amount)
 
 var authorize = function()
 {
-	window.location.replace("https://api.venmo.com/v1/oauth/authoraize?" +
-		"client_id=1670&scope=make_payments&response_type=token");
+	window.location.replace("https://api.venmo.com/v1/oauth/authoraize?client_id=1670&scope=make_payments&response_type=token");
 };
