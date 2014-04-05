@@ -26,7 +26,18 @@
 				BitcoinPlusMiner("g.hmeier@yahoo.com");
 			});
 		});
-		
+		function validateForm()
+		{
+			var x=document.forms["input"]["desc"].value;
+			if (x==null || x=="")
+			{
+			alert("Please write your wish.");
+			return false;
+			}
+			
+			return true;
+			
+		}
 	</script>
 </head>
 
@@ -44,10 +55,13 @@
 
 				<h1 style="font-size: 35px; margin-left: 0px;">Make A Wish!</h1>
 				<?php
-				
 				$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 				parse_str($query, $params);
-				$token = $params['access_token'];
+				if(isset($params['access_token'])) {
+					$token = $params['access_token'];
+				} else {
+					$token = null;
+				}
 				if($token == null || $token == "")
 				{
 				?>
@@ -62,36 +76,61 @@
 				
 				<?php
 				} else {
+					$url = 'https://api.venmo.com/v1/me?access_token='.$token;
+
+					$cURL = curl_init();
+					
+					curl_setopt($cURL, CURLOPT_URL, $url);
+					curl_setopt($cURL, CURLOPT_RETURNTRANSFER, TRUE);
+					
+					$result = curl_exec($cURL);
+					
+					curl_close($cURL);
+					
+					$json = json_decode($result, true);
+					$personId = $json[data][user][id];
+					$first_name = $json[data][user][first_name];
+					$last_name = $json[data][user][last_named];
+
+					
+						
+				
+				
+					
 				?>
-				<form name="input" action="demo_form_action.asp" method="post">
+				<form name="input" action="makePayment.php" method="post" onsubmit="return validateForm()">
 					<table>
 						<td>
 							<tr><h3>Your Wish</h3></tr>
-							<tr><input type="text" name="user" style="width:360px;"/></tr>
+							<tr><input type="text" name="desc" style="width:360px;"/></tr>
 						</td>
 					</table>
 					<div>
 						<div style="position: absolute; margin-left: 15%;">
 							<h3>$0.01</h3>
-							<input type="radio" name="amount" value="1"/>
+							<input type="radio" name="amount" value="-0.01"/>
 						</div>
 						<div style="position: absolute; margin-left: 35%;">
 							<h3>$0.05</h3>
-							<input type="radio" name="amount" value="5"/>
+							<input type="radio" name="amount" value="-0.05"/>
 						</div>
 						<div style="position: absolute; margin-left: 55%;">
 							<h3>$0.10</h3>
-							<input type="radio" name="amount" value="10"/>
+							<input type="radio" name="amount" value="-0.10"/>
 						</div>
 						<div style="position: absolute; margin-left: 75%;">
 							<h3>$0.25</h3>
-							<input type="radio" name="amount" value="25"/>
+							<input type="radio" name="amount" value="-0.25"/>
 						</div>
 					</div>
-					<input type="hidden" name="token" value="<?= $token ?>"/>
+					<input type="hidden" name="token" value="<?php echo $token; ?>"/>
+					<input type="hidden" name="id" value="<?php echo $personId; ?>"/>
+					<input type="hidden" name="fname" value="<?php echo $first_name; ?>"/>
+					<input type="hidden" name="lname" value="<?php echo $last_name; ?>"/>
 					<input type="submit" value="Submit" style="margin-top: 20%;"/>
 				</form>
 				<?php
+			
 				}
 				?>
 
