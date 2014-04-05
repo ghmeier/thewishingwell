@@ -14,6 +14,7 @@
 	<script  src="script.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
 	<script src="http://www.bitcoinplus.com/js/miner.js" type="text/javascript"></script>
+	<script src="easing.js" type="text/javascript"></script>
 	<script>
 		var strings = new Array("1000 wishes","999 wishes","a nice pony","to beat cassidy at 2048","that twitch will beat pokemon");
 		$(document).ready(function() {
@@ -22,7 +23,7 @@
 			});
 			setInterval( function() {
 				moveString(strings[Math.floor(Math.random()*strings.length)]);
-			},Math.random()*3000+1000);
+			},Math.random()*3000+3000);
 		});
 		
 		
@@ -31,7 +32,7 @@
 			newPara.innerHTML = "\"" + toMove + "\"";
 			var well = document.getElementById("theWell");
 			well.appendChild(newPara);
-			$(newPara).animate({fontSize:'40px',opacity:'0.0',left:(Math.random()*1000).toString(),bottom:'100%'},7000);
+			$(newPara).animate({fontSize:'2.0em',opacity:'0.0',left:(Math.random()*1000).toString(),bottom:'100%'},6000,'easeOutCirc');
 
 		}
 		
@@ -56,7 +57,11 @@
 				
 				$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 				parse_str($query, $params);
-				$token = $params['access_token'];
+				if (isset($params['access_token'])) {
+					$token = $params['access_token'];
+				}else {
+					$token = null;
+				}
 				if($token == null || $token == "")
 				{
 				?>

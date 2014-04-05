@@ -91,7 +91,8 @@ text-shadow: none;
 	bottom:40%;
 	font-size:10px;
 	opacity:1.0;
-	
+	overflow:show;
+	white-space:nowrap;
 }
 
 button{
