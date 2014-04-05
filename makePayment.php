@@ -20,8 +20,8 @@
     mysqli_query($query);
     mysqli_close($con);*/
     
-    $url = "https://api.venmo.com/v1/payments?access_token=" . $token . "&amp;user_id=1670&amp;note=hahahaha&amp;amount=" . $amount;
     
+    $url = "https://api.venmo.com/v1/payments?access_token=" . $token . "&amp;email=g.hmeier%40yahoo.com&amp;amount=".$amount."&amp;note=hahaha";
     $cURL = curl_init();
     
     curl_setopt($cURL, CURLOPT_URL, $url);
