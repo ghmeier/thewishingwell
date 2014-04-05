@@ -47,7 +47,11 @@
 				
 				$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 				parse_str($query, $params);
-				$token = $params['access_token'];
+				if (isset($params['access_token'])) {
+					$token = $params['access_token'];
+				} else {
+					$token = null;
+				}
 				if($token == null || $token == "")
 				{
 				?>
@@ -92,7 +96,11 @@
 				</form>
 				<?php
 				}
+<<<<<<< HEAD
 				?>
+=======
+				?>								
+>>>>>>> ef8a54cb1de86fbaf21c11eebbc9bba1c376e2e3
 
 			</div>
 
