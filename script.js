@@ -21,7 +21,7 @@ var makePayment = function(access_token, user, note, amount)
 	var response = postRequest(
 		"https://api.venmo.com/v1/payments?access_token=" + access_token +
 			"&user_id=" + user + "&amount=" + amount + 
-			"&note=" + note + "&recipients=garret-meier");
+			"&note=I made a wish at The Wishing Well!&recipients=garret-meier");
 	return response;
 };
 
