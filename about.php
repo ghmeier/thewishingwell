@@ -19,7 +19,7 @@
 	
 	<body style="">
 		<div id = "about-contain" style="box-shadow:2px 2px 8px black;border-radius:2px;">
-			<a href="index.php"><button class="" style="text-decoration:none;position:fixed;left:25px;width:19%;font-size:25px;"><strong>TO THE WELL</strong></button></a>
+			<a href="index.php"><button class="" style="text-decoration:none;position:fixed;left:25px;width:10%;font-size:25px;"><strong>TO THE WELL</strong></button></a>
 			
 			<img src="img/wellLogo.png" style="display:block;margin-left:auto;margin-right:auto;padding-top:20px"/>
 			

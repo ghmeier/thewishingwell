@@ -60,14 +60,33 @@
 		<?php
 		$query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 		parse_str($query, $params);
-		
+		if(isset($params['access_token'])) {
+			$token = $params['access_token'];
+		} else {
+			$token = null;
+		}
 		if(isset($params['complete'])) {
-			echo "<h3>Thank you for you wish!</h3>";	
+			if($params['complete'] == 1) {
+				echo "<h3>Thank you for you wish!</h3>";
+			} else if($params['complete'] == 2) {
+				echo "<h3>You took a wish!</h3>";
+			}
 		} else echo "<h3> <br/></h3>";
 		?>				
 		<div id="container">
-			<div id="theWell" action="takecoin.php">
+			<div id="theWell" >
+				<?php
+				if($token != null) {
+					
+				?>
+				<a href="takecoin.php?access_token=<?php echo $token?>"><img src="img/wishingwell.png"/></a>
+				<?php
+				} else {
+				?>
 				<img src="img/wishingwell.png"/>
+				<?php	
+				}
+				?>
 			</div>
 			
 			<div id="backgroundWishForm">
@@ -80,16 +99,11 @@
 				
 				<?php
 				
-				if(isset($params['access_token'])) {
-					$token = $params['access_token'];
-				} else {
-					$token = null;
-				}
-				if(($token == null || $token == "") && !isset($params['complete']))
+				if(($token == null))
 				{
 				?>
 				<h2>Toss your coin using:</h2>
-                <button id="venmo" class="wellButton" style="height:40px; width:300px;" onclick="authorize()"><img src="img/venmo_logo_white.png" style="width:132; height:25"/></button> 
+				<button id="venmo" class="wellButton" style="height:40px; width:300px;" onclick="authorize()"><img src="img/venmo_logo_white.png" style="width:132; height:25"/></button> 
 				<h2 style="padding:0px;margin:0px;-webkit-margin-before: 0.00em;-webkit-margin-after: 0.00em;">OR</h2>				
 				<button id="bitcoin" class="wellButton" title="Bitcoin Miner" onclick="bitStart()" style="height:40px;width:300px;"><img src="img/bitcoin-logo.png" style="width:132"/></button>
 				
@@ -122,7 +136,7 @@
 					<div>
 						<div style="position: absolute; margin-left: 15%;">
 							<img src="img/penny.png" style="width:50px"/>
-							<input type="radio" name="amount" value="0.01"></input>
+							<input type="radio" name="amount" value="0.01"/>
 						</div>
 						<div style="position: absolute; margin-left: 35%;">
 							<img src="img/nickel.png" style="width:60px"/>
@@ -148,56 +162,57 @@
 				<?php } ?>
 
 			</div>
-
-			<div id="backgroundUserFeed">
-                        </div>
+			
 			<div id="userFeed">
-				<div>
-				<h1 style="margin-top: 30px;">Activity at the Well</h1>
+				<h1>Activity at the Well</h1>
 				<!--
 				This section of php connects to the database, grabs all of the rows, and puts the information
 				in divs. If there are more than 10 data points in the database, it stops and only adds the
 				wishes to the javascript array which gets called.
 				-->
 				<?php 
-					$con = mysqli_connect("localhost","root","Goringelitistmarmot1","isu_hackathon");
+					$con = mysqli_connect("127.0.0.1","root","newi4216","isu_hackathon");
 					$query = "Select * from activity order by id DESC";//grab all the rows
 					$result = mysqli_query($con,$query);
 					$count = 0;
-					foreach($result as $row){
+					
+					while($row = mysqli_fetch_array($result)){
 						
+						echo "<div>";
 						if ($row['type']==1) {
+	
 							if ($count<9){
 								echo "<button id='took'>".$row['name']." grabbed $".$row['amount']." from the well</button>";//will work when taking is implemented
 								$count==$count+1;
 							}
-						}elseif ($row['type']==0) {
+						}else if ($row['type']==0) {
 							if ($count<9) {
-							echo "<button id='added'>".$row['name']." tossed $".$row['amount']." into the well</button>";?>
-							<?php $count=$count+1; } ?>
-							<script> 
-							var toAdd = <?= json_encode($row['description'])?>;
+							echo "<button id='added'>".$row['name']." tossed $".$row['amount']." into the well</button>";
+							$count=$count+1;
+							}
+							//echo $row['description'];
+						?>
+							<script>
+							var toAdd = <?php echo json_encode($row['description'])?>;
 
 								strings.push( toAdd )</script>
-
-						<?php }else {
-							if ($count<9) {
-							echo "<button id='wished'>A Friend wished for ".$row['description']."</button>";?>
-							<?php $count=$count+1; } ?>
-							<script> 
-							var toAdd = <?= json_encode($row['description'])?>;
-
-								strings.push( toAdd )</script>	
-					<?php }								
-				 }
-				// mysql_close($con);
+		
+						<?php
+						}
+						echo "</div>";
+					
+					}
+				
 				 ?>
-				</div>
-			</div>
-			<div id = "disclaimer" style="position:absolute;opacity:.7;font-size:14px;left:1%;bottom:1%;">
-				<a href="about.php" style="text-decoration:none"><button>About The Wishing Well</button></a> - <button>100% Daily Proceeds go to  <a href="www.wish.org">The Make A Wish Foundation</href>.</button>
+				
 			</div>
 		</div>
+		
+		<div id = "disclaimer" style="position:absolute;opacity:.7;font-size:14px;left:1%;bottom:1%;">
+			<a href="about.php" style="text-decoration:none"><button>About The Wishing Well</button></a> - <button>100% Daily Proceeds go to  <a href="http://www.wish.org">The Make A Wish Foundation</href>.</button>
+		</div>
+		
+		
 
 	</body>
 </html>
