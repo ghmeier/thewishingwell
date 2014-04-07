@@ -171,7 +171,7 @@
 				wishes to the javascript array which gets called.
 				-->
 				<?php 
-					$con = mysqli_connect("127.0.0.1","root","newi4216","isu_hackathon");
+					$con = mysqli_connect("127.0.0.1","root","","isu_hackathon");
 					$query = "Select * from activity order by id DESC";//grab all the rows
 					$result = mysqli_query($con,$query);
 					$count = 0;

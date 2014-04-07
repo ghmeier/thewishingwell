@@ -16,7 +16,7 @@
 		if ($lname == null) {
 			$lname = "Geiken";
 		}
-		$con=mysqli_connect("127.0.0.1","root","newi4216","isu_hackathon");
+		$con=mysqli_connect("127.0.0.1","root","","isu_hackathon");
 
 		// Check connection
 		if (mysqli_connect_errno())
